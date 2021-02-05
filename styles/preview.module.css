@@ -1,0 +1,50 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fefc01;
+  height: 100vh;
+  color: #fff;
+}
+
+.preview {
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 0;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.toolbar {
+  position: absolute;
+  display: flex;
+  color: #fff;
+  right: 0;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 13px;
+  right: 5px;
+  background: yellow;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 30px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.footer h2 {
+  font-size: 8px;
+  margin-right: 3px;
+}
+
+.sendIcon {
+  font-size: 10px !important;
+}
