@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { v4 as uuid } from "uuid";
 
 import {
