@@ -1,7 +1,9 @@
 import firebase from "firebase/app";
-import "firebase/firestore";
 import "firebase/auth";
+import "firebase/firestore";
 import "firebase/storage";
+import "firebase/analytics";
+import "firebase/performance";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDdHBGleS1DfZKhYkSICt1dEqWOHZ9HsOE",
@@ -13,10 +15,16 @@ const firebaseConfig = {
   measurementId: "G-BQ09YQ8NN6",
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-const provider = new firebase.auth.GoogleAuthProvider();
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+  // Check that `window` is in scope for the analytics module!
+  if (typeof window !== "undefined") {
+    // Enable analytics. https://firebase.google.com/docs/analytics/get-started
+    if ("measurementId" in firebaseConfig) {
+      firebase.analytics();
+      firebase.performance();
+    }
+  }
+}
 
-export { db, auth, storage, provider };
+export default firebase;
