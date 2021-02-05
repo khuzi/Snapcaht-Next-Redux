@@ -1,13 +1,11 @@
 import React from "react";
 
-import { WebCamCapture } from "../components";
-
-import classes from "../styles/Home.module.css";
+import { WebCamCapture, BackScreen } from "../components";
 
 export default function Home() {
   return (
-    <div className={classes.root}>
+    <BackScreen>
       <WebCamCapture />
-    </div>
+    </BackScreen>
   );
 }

@@ -1,12 +1,13 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import Router from "next/router";
 import Webcam from "react-webcam";
 import { useDispatch } from "react-redux";
-
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
+import { Spinner } from "../../common";
+import { setCameraImage } from "../../../redux/slices/cameraSlice";
+
 import classes from "./webcam.module.css";
-import { setCameraImage } from "../../redux/slices/cameraSlice";
 
 const videoConstraints = {
   width: 250,
@@ -15,6 +16,7 @@ const videoConstraints = {
 };
 
 export function WebCamCapture() {
+  const [loading, setLoading] = useState(true);
   const webcamRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -23,6 +25,12 @@ export function WebCamCapture() {
     dispatch(setCameraImage(imageSrc));
     Router.push("/preview");
   }, [webcamRef]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <div className={classes.webcamCapture}>
@@ -34,11 +42,13 @@ export function WebCamCapture() {
         width={videoConstraints.width}
         videoConstraints={videoConstraints}
       />
-      <RadioButtonUncheckedIcon
-        className={classes.webcamCapture_button}
-        fontSize="large"
-        onClick={capture}
-      />
+      {!loading && (
+        <RadioButtonUncheckedIcon
+          className={classes.webcamCapture_button}
+          fontSize="large"
+          onClick={capture}
+        />
+      )}
     </div>
   );
 }

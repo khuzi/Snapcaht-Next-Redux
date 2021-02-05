@@ -1,25 +1,39 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-// import { useRouter } from "next/router";
+import Router from "next/router";
 import Head from "next/head";
-
 import { Provider } from "react-redux";
-import store from "../redux/store/store";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
+import store from "../redux/store/store";
+import { Spinner } from "../components";
 import { theme } from "../theme";
 
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
+  const [loading, setLoading] = useState(false);
+
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-  });
+    const handleRouteChange = () => {
+      setLoading(true);
+    };
+    const handleRouteComplete = () => {
+      setLoading(false);
+    };
+    Router.events.on("routeChangeStart", handleRouteChange);
+    Router.events.on("routeChangeComplete", handleRouteComplete);
+
+    return () => {
+      Router.events.off("routeChangeStart", () => handleRouteChange);
+      Router.events.off("routeChangeStart", () => handleRouteComplete);
+    };
+  }, []);
   return (
     <>
       <Head>
@@ -34,7 +48,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <StylesProvider injectFirst>
             <CssBaseline />
-            <Component {...pageProps} />
+            {loading ? <Spinner /> : <Component {...pageProps} />}
           </StylesProvider>
         </ThemeProvider>
       </Provider>
