@@ -8,7 +8,7 @@ import {
   selectCameraImage,
   resetCameraImage,
 } from "../../../redux/slices/cameraSlice";
-import { storage, db } from "../../../firebase";
+import { storage, db } from "../../lib/firebase";
 
 import CloseIcon from "@material-ui/icons/Close";
 import TextFieldIcon from "@material-ui/icons/TextFields";
