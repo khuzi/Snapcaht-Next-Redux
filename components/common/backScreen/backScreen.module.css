@@ -1,8 +1,8 @@
 .backScreen {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background: #fefc01;
   height: 100vh;
-  color: #fff;
+  flex-flow: column;
 }

@@ -1,0 +1,15 @@
+.chatPosts {
+  height: 359px;
+  background: #fff;
+  box-shadow: 1px -7px 7px -6px rgba(0, 0, 0, 0.44);
+  margin-top: -8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chatPosts::-webkit-scrollbar {
+  display: none;
+}

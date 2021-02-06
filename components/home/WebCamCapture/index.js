@@ -9,8 +9,8 @@ import { setCameraImage } from "../../../redux/slices/cameraSlice";
 import classes from "./webcam.module.css";
 
 const videoConstraints = {
-  width: 300,
-  height: 500,
+  width: 250,
+  height: 400,
   facingMode: "user",
 };
 
