@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Router from "next/router";
+// import Router from "next/router";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,26 +13,11 @@ import { theme } from "../theme";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
-
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-    const handleRouteChange = () => {
-      setLoading(true);
-    };
-    const handleRouteComplete = () => {
-      setLoading(false);
-    };
-    Router.events.on("routeChangeStart", handleRouteChange);
-    Router.events.on("routeChangeComplete", handleRouteComplete);
-
-    return () => {
-      Router.events.off("routeChangeStart", () => handleRouteChange);
-      Router.events.off("routeChangeStart", () => handleRouteComplete);
-    };
   }, []);
   return (
     <>
@@ -48,7 +33,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <StylesProvider injectFirst>
             <CssBaseline />
-            {loading ? <Spinner /> : <Component {...pageProps} />}
+            <Component {...pageProps} />
           </StylesProvider>
         </ThemeProvider>
       </Provider>
